@@ -3,8 +3,12 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                bat 'mvn -B -DskipTests clean package' 
+                cmd_exec('mvn -B -DskipTests clean package') 
             }
         }
+    }
+    
+    def cmd_exec(command) {
+        return bat(returnStdout:true, script: "${command}").trim()
     }
 } 
